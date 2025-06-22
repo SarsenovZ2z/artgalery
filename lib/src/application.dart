@@ -5,9 +5,12 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
+      home: const HomePage(),
     );
   }
 }
@@ -17,10 +20,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(),
-      body: const Placeholder(),
+      body: Center(
+        child: Text('Roboto text'),
+      ),
     );
   }
 }
