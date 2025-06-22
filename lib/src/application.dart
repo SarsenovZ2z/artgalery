@@ -1,3 +1,4 @@
+import 'package:artgalery/src/utils/unsplash_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,10 +30,22 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: ShimmerLoading(
             isLoading: true,
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
+            child: InkWell(
+              onTap: () async {
+                final res = await UnsplashClient().get(
+                    '/search/photos',
+                  queryParameters: {
+                    'query': "Van Gogh",
+                    'per_page': 10,
+                  },
+                );
+                print(res.data);
+              },
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              ),
             ),
           ),
         ),
