@@ -32,10 +32,7 @@ class AppScaffold extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        top: false,
-        child: child,
-      ),
+      body: child,
     );
   }
 }
