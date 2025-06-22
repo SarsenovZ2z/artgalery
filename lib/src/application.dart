@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -21,9 +22,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(),
       body: Center(
-        child: Text('Roboto text'),
+        child: SvgPicture.asset('assets/icons/logo.svg'),
       ),
     );
   }
