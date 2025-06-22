@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'common/presentation/widgets/shimmer.dart';
+
 class Application extends StatelessWidget {
   const Application({super.key});
 
@@ -22,10 +24,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(),
-      body: Center(
-        child: SvgPicture.asset('assets/icons/logo.svg'),
+      body: Shimmer(
+        child: Center(
+          child: ShimmerLoading(
+            isLoading: true,
+            child: Container(
+              width: 100,
+              height: 100,
+              color: Colors.red,
+            ),
+          ),
+        ),
       ),
     );
   }
