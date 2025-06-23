@@ -20,7 +20,7 @@ class ImageUnsplashDatasource extends UnsplashDatasource
       '/search/photos',
       queryParameters: {
         'query': q,
-        'per_page': 15,
+        'per_page': 8,
       },
     );
 

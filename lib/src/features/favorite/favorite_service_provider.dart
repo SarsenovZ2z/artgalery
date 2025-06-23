@@ -5,6 +5,7 @@ import 'package:artgalery/src/features/favorite/domain/repositories/favorite_rep
 import 'package:artgalery/src/features/favorite/domain/usecases/get_favorite_urls.dart';
 import 'package:artgalery/src/features/favorite/domain/usecases/toggle_favorite.dart';
 import 'package:artgalery/src/features/favorite/presentation/controllers/favorite_cubit.dart';
+import 'package:artgalery/src/features/favorite/presentation/pages/favorites_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,19 @@ class FavoriteServiceProvider extends ServiceProvider {
     GlobalKey<NavigatorState>? rootNavigatorKey,
     GlobalKey<NavigatorState>? shellNavigatorKey,
   }) {
-    return [];
+    return [
+      GoRoute(
+        path: '/favorites',
+        name: 'favorites',
+        parentNavigatorKey: shellNavigatorKey,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: FavoritesScreen(
+            key: state.pageKey,
+          ),
+        ),
+      ),
+    ];
   }
 
   @override

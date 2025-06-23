@@ -73,7 +73,9 @@ class _FavoritesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        context.pushNamed('favorites');
+      },
       icon: SvgPicture.asset(
         'assets/icons/heart.svg',
       ),
