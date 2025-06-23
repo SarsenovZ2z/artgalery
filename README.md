@@ -6,7 +6,7 @@
 
 ## 📹 Демонстрация
 
-<video src="https://user-images.githubusercontent.com/yourusername/demo.mp4" controls width="320" />
+<video src="https://github.com/user-attachments/assets/5c6f913f-9686-4c14-b9a5-e2e9bcfcb80d" controls width="320" />
 
 ---
 
