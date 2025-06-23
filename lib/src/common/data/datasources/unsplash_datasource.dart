@@ -1,9 +1,9 @@
 import 'package:artgalery/src/utils/unsplash_client.dart';
 
-class RemoteDataSource {
+class UnsplashDatasource {
   final UnsplashClient api;
 
-  const RemoteDataSource({
+  const UnsplashDatasource({
     required this.api,
   });
 }

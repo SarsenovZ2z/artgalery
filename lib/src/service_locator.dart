@@ -1,3 +1,4 @@
+import 'package:artgalery/src/features/image/image_service_provider.dart';
 import 'package:artgalery/src/utils/api.dart';
 import 'package:artgalery/src/utils/unsplash_client.dart';
 import 'package:get_it/get_it.dart';
@@ -7,6 +8,7 @@ import 'features/home/home_service_provider.dart';
 
 const services = <ServiceProvider>[
   HomeServiceProvider(),
+  ImageServiceProvider(),
 ];
 
 Future<void> init() async {

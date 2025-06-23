@@ -5,11 +5,11 @@ abstract class UseCase<T, P> {
 
   Future<Either<Object, T>> call(P params) async {
     try {
-      return Right(await _call(params));
+      return Right(await run(params));
     } catch (e) {
       return Left(e);
     }
   }
 
-  Future<T> _call(P params);
+  Future<T> run(P params);
 }
