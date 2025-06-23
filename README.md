@@ -1,16 +1,31 @@
-# artgalery
+# 📱 Flutter Test App — Unsplash Image Search
 
-A new Flutter project.
+Приложение для поиска изображений через Unsplash API.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📹 Демонстрация
 
-A few resources to get you started if this is your first Flutter project:
+<video src="https://user-images.githubusercontent.com/yourusername/demo.mp4" controls width="320" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📦 Скачать APK
+
+👉 [Скачать APK (app-release.apk)](https://drive.google.com/file/d/1hLo0ey2BnUeJAd1cSwllQWwS54hpSqt9/view?usp=sharing)
+
+---
+
+## 📲 Как установить
+
+1. Скачайте `.apk` файл по ссылке выше;
+2. Перенесите файл на Android-устройство;
+3. Разрешите установку из неизвестных источников (если потребуется);
+4. Установите и откройте приложение.
+
+---
+
+## 🔐 API Key
+
+Приложение использует ключ доступа к Unsplash API. Убедитесь, что вы добавили файл `.env` со следующим содержимым:
+UNSPLASH_ACCESS_KEY=your_access_key_here
