@@ -57,7 +57,9 @@ class _SearchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        context.goNamed('home');
+      },
       icon: SvgPicture.asset(
         'assets/icons/search.svg',
       ),

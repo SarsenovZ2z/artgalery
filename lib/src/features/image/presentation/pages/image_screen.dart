@@ -1,5 +1,6 @@
 import 'package:artgalery/src/common/presentation/controllers/data_states.dart';
-import 'package:artgalery/src/common/presentation/widgets/shimmer.dart';
+import 'package:artgalery/src/features/favorite/presentation/controllers/favorite_cubit.dart';
+import 'package:artgalery/src/features/image/domain/entities/image_entity.dart';
 import 'package:artgalery/src/features/image/presentation/controllers/image_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,15 @@ class ImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ImageCubit>(
-      create: (_) => GetIt.instance()..load(LoadImageParams(imageId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FavoritesCubit>(
+          create: (_) => GetIt.instance()..load(LoadFavoritesParams()),
+        ),
+        BlocProvider<ImageCubit>(
+          create: (_) => GetIt.instance()..load(LoadImageParams(imageId)),
+        ),
+      ],
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         padding: EdgeInsets.all(20),
@@ -76,18 +84,8 @@ class _UserInfo extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-              ),
-              icon: SvgPicture.asset(
-                'assets/icons/heart.svg',
-                colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
-              ),
+            _FavoriteButton(
+              image: state.result.image,
             ),
             IconButton(
               onPressed: () {},
@@ -131,5 +129,58 @@ class _Image extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+class _FavoriteButton extends StatelessWidget {
+  final ImageEntity image;
+
+  const _FavoriteButton({
+    super.key,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FavoritesCubit, DataState<Favorites>>(
+      builder: (context, state) {
+        return IconButton(
+          onPressed: () {
+            context.read<FavoritesCubit>().toggle(image);
+          },
+          style: ButtonStyle(
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+          icon: _HeartIcon(
+            filled: state is LoadedState<Favorites> &&
+                state.result.isFavorite(image),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _HeartIcon extends StatelessWidget {
+  final bool filled;
+
+  const _HeartIcon({
+    super.key,
+    required this.filled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'assets/icons/heart.svg',
+      colorFilter: ColorFilter.mode(
+        filled ? Colors.red : Colors.black,
+        filled ? BlendMode.srcIn : BlendMode.srcIn,
+      ),
+    );
   }
 }

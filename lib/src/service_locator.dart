@@ -1,3 +1,4 @@
+import 'package:artgalery/src/features/favorite/favorite_service_provider.dart';
 import 'package:artgalery/src/features/image/image_service_provider.dart';
 import 'package:artgalery/src/utils/api.dart';
 import 'package:artgalery/src/utils/unsplash_client.dart';
@@ -9,6 +10,7 @@ import 'features/home/home_service_provider.dart';
 const services = <ServiceProvider>[
   HomeServiceProvider(),
   ImageServiceProvider(),
+  FavoriteServiceProvider(),
 ];
 
 Future<void> init() async {
@@ -16,7 +18,7 @@ Future<void> init() async {
     provider.register();
   }
 
-  GetIt.instance.registerLazySingletonAsync<SharedPreferences>(
+  GetIt.instance.registerSingletonAsync<SharedPreferences>(
     () => SharedPreferences.getInstance(),
   );
 
