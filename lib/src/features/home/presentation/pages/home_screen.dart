@@ -1,3 +1,4 @@
+import 'package:artgalery/src/features/image/domain/entities/image_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:artgalery/src/common/presentation/controllers/data_states.dart';
 import 'package:artgalery/src/features/image/presentation/controllers/search_images_cubit.dart';
@@ -5,24 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SearchImagesCubit>(
-      create: (_) => GetIt.instance()..load(LoadImagesParams('Van Gogh')),
-      child: RefreshIndicator(
-        onRefresh: () async {},
-        child: ListView(
-          children: [
-            _Search(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: _Images(),
-            ),
-          ],
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: BlocProvider<SearchImagesCubit>(
+        create: (_) => GetIt.instance()..load(LoadImagesParams('Van Gogh')),
+        child: RefreshIndicator(
+          onRefresh: () async {},
+          child: ListView(
+            children: [
+              _Search(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                child: _Images(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -118,13 +123,36 @@ class _Images extends StatelessWidget {
         itemCount: state.result.images.length,
         itemBuilder: (_, index) => AspectRatio(
           aspectRatio: 1,
-          child: CachedNetworkImage(
-            imageUrl: state.result.images[index].url,
-            fit: BoxFit.cover,
+          child: _Image(
+            image: state.result.images[index],
           ),
         ),
         separatorBuilder: (_, index) => SizedBox(height: 10),
       );
     });
+  }
+}
+
+class _Image extends StatelessWidget {
+  final ImageEntity image;
+
+  const _Image({
+    super.key,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.pushNamed('image', pathParameters: {
+          'imageId': image.id,
+        });
+      },
+      child: CachedNetworkImage(
+        imageUrl: image.url,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 }

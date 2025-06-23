@@ -13,4 +13,9 @@ class ImageRepositoryImpl implements ImageRepository {
   Future<List<ImageEntity>> searchImages(String q) {
     return imageDatasource.searchImages(q);
   }
+
+  @override
+  Future<ImageEntity> getImageById(String id) {
+    return imageDatasource.getImageById(id);
+  }
 }

@@ -4,6 +4,8 @@ import 'package:artgalery/src/features/image/domain/entities/image_entity.dart';
 
 abstract class ImageDatasource {
   Future<List<ImageEntity>> searchImages(String q);
+
+  Future<ImageEntity> getImageById(String id);
 }
 
 class ImageUnsplashDatasource extends UnsplashDatasource
@@ -27,5 +29,12 @@ class ImageUnsplashDatasource extends UnsplashDatasource
         (json) => ImageModel.fromJson(json),
       ),
     );
+  }
+
+  @override
+  Future<ImageEntity> getImageById(String id) async {
+    final response = await api.get('/photos/$id');
+
+    return ImageModel.fromJson(response.data);
   }
 }
