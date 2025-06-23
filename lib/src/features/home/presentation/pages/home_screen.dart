@@ -65,7 +65,7 @@ class _SearchFormState extends State<_SearchForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _onSubmit(String value) {
-    print(value);
+    context.read<SearchImagesCubit>().load(LoadImagesParams(value));
   }
 
   @override

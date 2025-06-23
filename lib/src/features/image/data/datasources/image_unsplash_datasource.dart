@@ -22,8 +22,6 @@ class ImageUnsplashDatasource extends UnsplashDatasource
       },
     );
 
-    print(response.data);
-
     return List<ImageEntity>.from(
       response.data['results'].map(
         (json) => ImageModel.fromJson(json),
