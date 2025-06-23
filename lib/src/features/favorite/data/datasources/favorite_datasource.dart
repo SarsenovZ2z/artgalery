@@ -22,7 +22,7 @@ class FavoriteLocalDatasource extends LocalDataSource
     final index = urls.indexOf(image.url);
 
     if (index == -1) {
-      _setFavoriteUrls(urls..add(image.url));
+      _setFavoriteUrls(urls..insert(0, image.url));
     } else {
       _setFavoriteUrls(urls..removeAt(index));
     }
